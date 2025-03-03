@@ -1,0 +1,35 @@
+{
+  "name": "change-node-version",
+  "version": "0.0.1",
+  "description": "A CLI tool to change Node.js version with nvm",
+  "main": "lib/main.js",
+  "module": "lib/main.esm.js",
+  "scripts": {
+    "dev": "node ./src/index.js 20.18.0 -s test",
+    "build": "webpack --mode production",
+    "test": "node ./test/index.mjs",
+    "pub": "npm run build && npm version patch && npm publish --registry=https://registry.npmjs.org/",
+    "postpub": "node ./postpub.js",
+    "postpub1": "git add . && git commit -am 'update' && git push"
+  },
+  "bin": {
+    "change-node-version": "./lib/main.js"
+  },
+  "files": [
+    "lib/*",
+    "Readme.md"
+  ],
+  "devDependencies": {
+    "@babel/core": "^7.0.0",
+    "@babel/preset-env": "^7.0.0",
+    "babel-loader": "^9.0.0",
+    "chalk": "^4.0.0",
+    "webpack": "^5.48.0",
+    "webpack-cli": "^4.6.0"
+  },
+  "dependencies": {
+    "commander": "^8.3.0",
+    "semver": "^7.7.1",
+    "shelljs": "^0.8.5"
+  }
+}
