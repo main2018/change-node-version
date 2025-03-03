@@ -1,6 +1,6 @@
 {
   "name": "change-node-version",
-  "version": "0.0.2",
+  "version": "0.0.3",
   "private": false,
   "description": "A CLI tool to change Node.js version with nvm",
   "main": "lib/main.js",
@@ -9,7 +9,7 @@
     "dev": "node ./src/index.js 20.18.0 -s test",
     "build": "webpack --mode production",
     "test": "node ./test/index.mjs",
-    "pub": "npm run build && npm version patch --no-git-tag-version&& npm publish --registry=https://registry.npmjs.org/",
+    "pub": "npm run build && npm version patch --no-git-tag-version && npm publish --registry=https://registry.npmjs.org/",
     "postpub": "node ./postpub.js",
     "postpub1": "git add . && git commit -am 'update' && git push"
   },
