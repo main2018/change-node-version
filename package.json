@@ -1,6 +1,7 @@
 {
   "name": "change-node-version",
   "version": "0.0.1",
+  "private": false,
   "description": "A CLI tool to change Node.js version with nvm",
   "main": "lib/main.js",
   "module": "lib/main.esm.js",
