@@ -31,6 +31,7 @@ const  checkNodeVersion = require('./checkNodeVersion');
 // console.log(process.argv, 11111);
 
 program
+  .name('change-node-version')
   .version('0.0.1')
   .description('A CLI tool to change Node.js version with nvm')
   .argument('<version>', 'The Node.js version to switch to') // 改成[version]是可选参数

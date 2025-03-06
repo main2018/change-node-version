@@ -2,14 +2,17 @@
  * @Author: haobin.wang
  * @Date: 2025-02-13 15:14:12
  * @LastEditors: wangpan pan.wang@ushow.media
- * @LastEditTime: 2025-03-02 23:56:24
+ * @LastEditTime: 2025-03-06 17:01:19
  * @Description: 校验node版本
  */
 const semver = require('semver');
 const chalk = require('chalk');
 const { exec, execSync } = require('child_process');
+const { set } = require('shelljs');
 
 const currentVersion = process.version;
+// 获取当前 Shell
+const shell = process.env.SHELL || 'zsh';
 
 function existsPackage(packageName) {
   // exec(`command -v ${packageName}`, (error, stdout, stderr) => {
@@ -32,6 +35,10 @@ function existsPackage(packageName) {
     return false
   }
 }
+function setDefaultVersion(targetVersion) {
+  execSync(`nvm alias default ${targetVersion}`, { stdio: 'inherit', shell: true });
+  log({color: 'green', message: `Node.js 版本 ${targetVersion} 已设置为默认版本`})
+}
 function switchVersion({targetVersion, script, setDefault}) {
   // console.log("准备切换版本");
   if (!existsPackage('nvm')) {
@@ -42,8 +49,8 @@ function switchVersion({targetVersion, script, setDefault}) {
   // exec(`source ~/.nvm/nvm.sh && nvm use ${targetVersion}`, (err, stdout, stderr) => {
   // exec(`${loadNvmCommand} && nvm use ${targetVersion}`, (err, stdout, stderr) => {
 
-  // 获取当前 Shell
-  const shell = process.env.SHELL || 'zsh';
+  // // 获取当前 Shell
+  // const shell = process.env.SHELL || 'zsh';
   try {
     // execSync(`${shell} -c "source ~/.nvm/nvm.sh && nvm use ${targetVersion} && ${shell}"`, { stdio: 'inherit', shell: true });
     // execSync(`${shell} -c "source ~/.nvm/nvm.sh && nvm use ${targetVersion} && echo 'Node.js 版本已切换为 ${targetVersion}' && ${shell}"`, { stdio: 'inherit', shell: true });
@@ -53,8 +60,7 @@ function switchVersion({targetVersion, script, setDefault}) {
     // log({color: 'green', message: `已退出新的 Shell，切换完成。`})
     // log({color: 'green', message: `Node.js 版本已切换为 ${targetVersion}`})
     if (setDefault) {
-      execSync(`nvm alias default ${targetVersion}`, { stdio: 'inherit', shell: true });
-      log({color: 'green', message: `Node.js 版本 ${targetVersion} 已设置为默认版本`})
+      setDefaultVersion(targetVersion)
     }
   } catch (err) {
     // console.error(err, stderr, 444444);
@@ -118,5 +124,10 @@ module.exports =  function checkNodeVersion({version: targetVersion = '20.18.x',
     log({color: 'yellow', message: `当前 Node 版本为 ${currentVersion}，但项目需要 Node 版本为 ${targetVersion}。尝试切换版本。`})
     switchVersion({targetVersion, script, setDefault});
     // process.exit(1);
+  } else {
+    if (setDefault) {
+      setDefaultVersion(targetVersion)
+    }
+    execSync(`${shell} -c "source ~/.nvm/nvm.sh && npm run ${script}"`, { stdio: 'inherit', shell: true });
   }
 }
