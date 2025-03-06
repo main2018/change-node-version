@@ -2,7 +2,7 @@
  * @Author: wangpan pan.wang@ushow.media
  * @Date: 2025-03-01 17:52:47
  * @LastEditors: wangpan pan.wang@ushow.media
- * @LastEditTime: 2025-03-03 16:07:52
+ * @LastEditTime: 2025-03-06 17:21:47
  * @FilePath: /change-node-version/webpack.config.js
  * @Description: 这是默认设置,请设置`customMade`, 打开koroFileHeader查看配置 进行设置: https://github.com/OBKoro1/koro1FileHeader/wiki/%E9%85%8D%E7%BD%AE
  */
@@ -20,14 +20,14 @@ module.exports = {
   },
   target: 'node',
   externalsPresets: { node: true }, // 排除 Node.js 内置模块
-  externals: [
-    {
-      shelljs: 'commonjs shelljs',
-      commander: 'commonjs commander',
-      semver: 'commonjs semver',
-      chalk: 'commonjs chalk',
-    },
-  ],
+  // externals: [
+  //   {
+  //     shelljs: 'commonjs shelljs',
+  //     commander: 'commonjs commander',
+  //     semver: 'commonjs semver',
+  //     chalk: 'commonjs chalk',
+  //   },
+  // ],
   module: {
     rules: [
       {
@@ -52,6 +52,6 @@ module.exports = {
     }),
   ],
   optimization: {
-    minimize: false,
+    minimize: true,
   },
 }
