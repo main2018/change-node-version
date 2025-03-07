@@ -2,7 +2,7 @@
  * @Author: wangpan pan.wang@ushow.media
  * @Date: 2025-03-02 22:54:56
  * @LastEditors: wangpan pan.wang@ushow.media
- * @LastEditTime: 2025-03-06 17:13:06
+ * @LastEditTime: 2025-03-06 17:38:20
  * @FilePath: /change-node-version/readme.md
  * @Description: 这是默认设置,请设置`customMade`, 打开koroFileHeader查看配置 进行设置: https://github.com/OBKoro1/koro1FileHeader/wiki/%E9%85%8D%E7%BD%AE
 -->
@@ -20,5 +20,6 @@ step2:
 npm run cnv
 ```
 
-### 可选项
+### 参数
+  - -s 或 --script 切换后要执行的脚本名称(必须)
   - -d 或 --default 配置为node的默认版本
